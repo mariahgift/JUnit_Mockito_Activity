@@ -68,7 +68,7 @@ public class AdvancedMathTester {
     @Test // Test 6: Test 2 BDD Format
     public void test2BDDFormat() {
         //Given
-        when(basicMath.add(75.0, 25.0)).thenReturn(100.0);
+        given(basicMath.add(75.0, 25.0)).willReturn(100.0);
 
         //When
         double result = advancedMath.multiplySumBy5(75.0, 25.0);
@@ -80,8 +80,8 @@ public class AdvancedMathTester {
     @Test // Test 7: Test 3 BDD Format
     public void test3BDDFormat() {
         //Given
-        when(basicMath.add(20.0, 20.0)).thenReturn(40.0);
-        when(basicMath.add(20.0, 20.0)).thenReturn(40.0);
+        given(basicMath.add(20.0, 20.0)).willReturn(40.0);
+        given(basicMath.add(20.0, 20.0)).willReturn(40.0);
 
         //When
         Assert.assertEquals(advancedMath.squareOfSum(20.0, 20.0), 1600.0, 0);
@@ -95,7 +95,7 @@ public class AdvancedMathTester {
     @Test // Test 8: Test 4 BDD Format
     public void test4BDDFormat() {
         //Given
-        when(basicMath.divide(50.0, 100.0)).thenReturn(0.5);
+        given(basicMath.divide(50.0, 100.0)).willReturn(0.5);
 
         //When
         double result = advancedMath.getPercentage(50.0, 100.0);
@@ -105,6 +105,7 @@ public class AdvancedMathTester {
 
         // Reset the mock object
         reset(basicMath);
+
         //Test again the AdvancedMath's Percentage method
         Assert.assertEquals(advancedMath.getPercentage(50.0, 100.0), 0.0, 0);
     }
