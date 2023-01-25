@@ -32,15 +32,17 @@ public class AdvancedMathTester {
 
     @Test // Test 3
     public void testSquareOfSum() {
+        // First call
         when(basicMath.add(20.0, 20.0)).thenReturn(40.0);
-        when(basicMath.add(20.0, 20.0)).thenReturn(40.0);
-
-        Assert.assertEquals(advancedMath.squareOfSum(20.0, 20.0), 1600.0, 0);
         Assert.assertEquals(advancedMath.squareOfSum(20.0, 20.0), 1600.0, 0);
 
-        // Verify
+        // Second call
+        when(basicMath.add(20.0, 20.0)).thenReturn(40.0);
+        Assert.assertEquals(advancedMath.squareOfSum(20.0, 20.0), 1600.0, 0);
+
+        // Use verify to check if add method has been called at least twice
         verify(basicMath, atLeast(2)).add(20.0, 20.0);
-        // Verify
+        // Use verify to check if add method has been called twice
         verify(basicMath, atMost(2)).add(20.0, 20.0);
     }
 
@@ -50,8 +52,10 @@ public class AdvancedMathTester {
         Assert.assertEquals(advancedMath.getPercentage(50.0, 100.0), 50, 0);
 
         reset(basicMath);
-        Assert.assertEquals(advancedMath.getPercentage(50.0, 100.0), 0.0, 0);
+        Assert.assertEquals(advancedMath.getPercentage(50.0, 100.0), 00.0, 0);
     }
+
+    // -----------------------Convert Test 1-4 using BDD---------------------------------
 
     @Test // Test 5: Test 1 BDD Format
     public void test1BDDFormat() {
@@ -107,7 +111,7 @@ public class AdvancedMathTester {
         reset(basicMath);
 
         //Test again the AdvancedMath's Percentage method
-        Assert.assertEquals(advancedMath.getPercentage(50.0, 100.0), 0.0, 0);
+        Assert.assertEquals(advancedMath.getPercentage(50.0, 100.0), 00.0, 0);
     }
 
 }
