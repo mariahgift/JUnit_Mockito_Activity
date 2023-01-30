@@ -26,29 +26,23 @@ public class AdvancedMathTester {
 
     @Test // Test 2
     public void testMultiplySumBy5() {
-        when(basicMath.add(75.0, 25.0)).thenReturn(100.0);
+        when(basicMath.multiply(basicMath.add(75.0, 25.0), 5)).thenReturn(500.0);
         Assert.assertEquals(advancedMath.multiplySumBy5(75.0, 25.0), 500.0, 0);
     }
 
     @Test // Test 3
     public void testSquareOfSum() {
-        // First call
-        when(basicMath.add(20.0, 20.0)).thenReturn(40.0);
-        Assert.assertEquals(advancedMath.squareOfSum(20.0, 20.0), 1600.0, 0);
-
-        // Second call
         when(basicMath.add(20.0, 20.0)).thenReturn(40.0);
         Assert.assertEquals(advancedMath.squareOfSum(20.0, 20.0), 1600.0, 0);
 
         // Use verify to check if add method has been called at least twice
         verify(basicMath, atLeast(2)).add(20.0, 20.0);
-        // Use verify to check if add method has been called twice
-        verify(basicMath, atMost(2)).add(20.0, 20.0);
+        verify(basicMath, times(2)).add(20.0, 20.0);
     }
 
     @Test // Test 4
     public void testGetPercentage() {
-        when(basicMath.divide(50.0, 100.0)).thenReturn(0.5);
+        when(basicMath.divide(50.0, 100.0)).thenReturn(0.50);
         Assert.assertEquals(advancedMath.getPercentage(50.0, 100.0), 50, 0);
 
         reset(basicMath);
@@ -72,7 +66,7 @@ public class AdvancedMathTester {
     @Test // Test 6: Test 2 BDD Format
     public void test2BDDFormat() {
         //Given
-        given(basicMath.add(75.0, 25.0)).willReturn(100.0);
+        given(basicMath.multiply(basicMath.add(75.0, 25.0), 5)).willReturn(500.0);
 
         //When
         double result = advancedMath.multiplySumBy5(75.0, 25.0);
@@ -85,21 +79,20 @@ public class AdvancedMathTester {
     public void test3BDDFormat() {
         //Given
         given(basicMath.add(20.0, 20.0)).willReturn(40.0);
-        given(basicMath.add(20.0, 20.0)).willReturn(40.0);
 
         //When
         Assert.assertEquals(advancedMath.squareOfSum(20.0, 20.0), 1600.0, 0);
-        Assert.assertEquals(advancedMath.squareOfSum(20.0, 20.0), 1600.0, 0);
+
 
         //Then
         verify(basicMath, atLeast(2)).add(20.0, 20.0);
-        verify(basicMath, atMost(2)).add(20.0, 20.0);
+        verify(basicMath, times(2)).add(20.0, 20.0);
     }
 
     @Test // Test 8: Test 4 BDD Format
     public void test4BDDFormat() {
         //Given
-        given(basicMath.divide(50.0, 100.0)).willReturn(0.5);
+        given(basicMath.divide(50.0, 100.0)).willReturn(0.50);
 
         //When
         double result = advancedMath.getPercentage(50.0, 100.0);
